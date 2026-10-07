@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Phone, User, Menu, X } from 'lucide-react'
 import Logo from './Logo.jsx'
 
@@ -16,8 +16,6 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  // Inner pages open on a dark photo banner, so the bar starts with light text.
-  const onDark = useLocation().pathname !== '/' && !scrolled
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30)
@@ -27,9 +25,9 @@ export default function Navbar() {
   }, [])
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''} ${onDark ? 'nav--dark' : ''}`}>
+    <header className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''}`}>
       <div className="container nav__inner">
-        <Logo light={onDark} />
+        <Logo />
         <nav className="nav__links">
           {links.map(([to, label]) => (
             <NavLink key={to} to={to} end={to === '/'} onClick={() => setOpen(false)}>
